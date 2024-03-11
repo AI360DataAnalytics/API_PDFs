@@ -11,7 +11,7 @@ import string
 import os
 from docxtpl import DocxTemplate
 import requests
-import comtypes.client
+from docx2pdf import convert
 import docx
 import boto3
 
@@ -721,19 +721,21 @@ async def estimate_appraisal(appraisal: Dict[str, Any] = {
         
     pdf_path = f"static\created\{id_apprasail}_generated_doc.pdf"
 
-    doc = docx.Document(doc_path)
+    convert(r'static\templates\Template_BPB.docx', r'static\created\29244_generated_doc.pdf' )
+    
+    # doc = docx.Document(doc_path)
 
-    word = comtypes.client.CreateObject("Word.Application")
-    docx_path = os.path.abspath(doc_path)
-    pdf_path = os.path.abspath(pdf_path)
+    # word = comtypes.client.CreateObject("Word.Application")
+    # docx_path = os.path.abspath(doc_path)
+    # pdf_path = os.path.abspath(pdf_path)
 
-    pdf_format = 17
-    word.Visible = False
-    in_file = word.Documents.Open(docx_path)
-    in_file.SaveAs(pdf_path, FileFormat = pdf_format)
-    in_file.Close()
+    # pdf_format = 17
+    # word.Visible = False
+    # in_file = word.Documents.Open(docx_path)
+    # in_file.SaveAs(pdf_path, FileFormat = pdf_format)
+    # in_file.Close()
 
-    word.Quit()
+    # word.Quit()
 
 
     insert_bucket(pdf_path, id_apprasail)
